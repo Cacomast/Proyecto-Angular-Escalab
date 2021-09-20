@@ -1,0 +1,59 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<section id="wrapper">
+    <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+        <div class="login-box card">
+            <div class="card-body">
+                <form class="form-horizontal form-material" id="loginform" [formGroup]="form" (ngSubmit)="registrar()">
+                    <h3 class="box-title m-b-20">Nuevo Usuario</h3>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" formControlName="nombre" type="text" placeholder="Nombre">
+                            <small *ngIf="nombreNoValido" class="text-danger">
+                                Ingrese un nombre
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" formControlName="email" type="text" placeholder="Correo">
+                            <small *ngIf="emailNoValido" class="text-danger">
+                                Ingrese un correo válido
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" formControlName="password" type="password" placeholder="Password">
+                            <small *ngIf="passwordNoValido" class="text-danger">
+                                Ingrese un password mínimo de 6 caractéres
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" formControlName="repitePassword" type="password" placeholder="Confirma Password">
+                            <small *ngIf="repitePasswordNoValido" class="text-danger">
+                                Passwords no son iguales
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group text-center p-b-20 mt-3">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Registrar</button>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            ¿Ya tienes una cuenta? <a [routerLink]="['/login']" class="text-info m-l-5"><b>Ingresar</b></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->

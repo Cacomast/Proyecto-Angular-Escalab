@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  hostAuthApi: 'https://identitytoolkit.googleapis.com/v1/accounts:',
+  apiKey: 'AIzaSyAQkQFTMbIFWVeB09ASukDsaaw5L8zLyv0'
 };
 
 /*
