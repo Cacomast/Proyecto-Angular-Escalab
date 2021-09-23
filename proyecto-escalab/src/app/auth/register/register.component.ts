@@ -24,25 +24,25 @@ export class RegisterComponent implements OnInit {
 
   private crearFormulario() {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      repitePassword: ['', Validators.required],
-      nombre : ['', Validators.required]
+      email: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')]],
+      password: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(6)]],
+      repitePassword: ['', [Validators.required, Validators.maxLength(50)]],
+      nombre : ['', [Validators.required, Validators.maxLength(50)]]
     },{
       validators: this.validators.passwordsIguales('password','repitePassword')
     });
   }
 
-  get nombreNoValido() {
-    return this.form.get('nombre').invalid && this.form.get('nombre').touched;
+  get email() {
+    return this.form.get('email');
   }
 
-  get emailNoValido() {
-    return this.form.get('email').invalid && this.form.get('email').touched;
+  get nombre() {
+    return this.form.get('nombre');
   }
 
-  get passwordNoValido() {
-    return this.form.get('password').invalid && this.form.get('password').touched;
+  get password() {
+    return this.form.get('password');
   }
   
   get repitePasswordNoValido() {

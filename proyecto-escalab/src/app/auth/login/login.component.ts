@@ -22,18 +22,19 @@ export class LoginComponent implements OnInit {
     this.crearFormulario();
   }
 
-  get emailNoValido() {
-    return this.form.get('email').invalid && this.form.get('email').touched;
+  get email(){
+    return this.form.get('email');
   }
 
-  get passwordNoValido() {
-    return this.form.get('password').invalid && this.form.get('password').touched;
+  get password(){
+    return this.form.get('password');
   }
 
   private crearFormulario() {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      email: [localStorage.getItem('email') || '', [Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+      recordar: [false]
     });
   }
 
@@ -45,6 +46,11 @@ export class LoginComponent implements OnInit {
       })
     }
 
+    if (this.form.get('recordar').value) {
+      localStorage.setItem('email', this.form.get('email').value);
+    } else {
+      localStorage.removeItem('email');
+    }
 
     Swal.fire({
       allowOutsideClick: false,

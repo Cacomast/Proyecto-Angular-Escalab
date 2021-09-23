@@ -10,25 +10,43 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input class="form-control" formControlName="nombre" type="text" placeholder="Nombre">
-                            <small *ngIf="nombreNoValido" class="text-danger">
-                                Ingrese un nombre
-                            </small>
+                            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                                <small *ngIf="nombre.errors.maxlength" class="text-danger">
+                                    Máximo 50 caractéres.
+                                </small>
+                                <small *ngIf="nombre.errors.required" class="text-danger">
+                                    Ingrese un nombre.
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" formControlName="email" type="text" placeholder="Correo">
-                            <small *ngIf="emailNoValido" class="text-danger">
-                                Ingrese un correo válido
-                            </small>
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <small *ngIf="email.errors.maxlength" class="text-danger">
+                                    Máximo 50 caractéres.
+                                </small>
+                                <small *ngIf="email.errors.pattern || email.errors.required" class="text-danger">
+                                    Ingrese un email válido.
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" formControlName="password" type="password" placeholder="Password">
-                            <small *ngIf="passwordNoValido" class="text-danger">
-                                Ingrese un password mínimo de 6 caractéres
-                            </small>
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                <small *ngIf="password.errors.maxlength" class="text-danger">
+                                    Máximo 50 caractéres.
+                                </small>
+                                <small *ngIf="password.errors.minlength" class="text-danger">
+                                    Mínimo 6 caractéres.
+                                </small>
+                                <small *ngIf="password.errors.required" class="text-danger">
+                                    Ingrese un password.
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">

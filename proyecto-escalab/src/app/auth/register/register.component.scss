@@ -9,7 +9,7 @@
 }
 
 .login-box {
-    width: 400px;
+    max-width: 400px;
     margin: 0 auto;
 }
 
@@ -37,4 +37,8 @@
     right: 0px;
     position: absolute;
     height: 100%;
+}
+
+.form-control {
+    padding-left: 1rem;
 }

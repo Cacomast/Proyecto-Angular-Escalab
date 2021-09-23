@@ -1,0 +1,12 @@
+<div class="card">
+    <img class="card-img-top img-responsive" src="{{ postModel.urlImagen }}" alt="Card image cap">
+    <div class="card-body">
+        <ul class="list-inline font-14">
+            <li class="p-l-0">{{ postModel.fecha | date }}</li>
+            <li><a href="javascript:void(0)" class="link">{{ postModel.comentarios.length }} Comentarios</a></li>
+        </ul>
+        <h3 class="font-normal">{{ postModel.titulo }}</h3>
+        <p class="m-b-0 m-t-10">{{ postModel.contenido }}</p>
+        <button class="btn btn-outline-warning waves-effect waves-light m-t-20">Ver Detalle</button>
+    </div>
+</div>

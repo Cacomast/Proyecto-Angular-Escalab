@@ -16,7 +16,7 @@ export class AuthService {
   constructor( private http: HttpClient) { }
 
   logout(){
-
+    localStorage.removeItem('token');
   }
 
   login(usuario: UsuarioModel) {
@@ -78,6 +78,16 @@ export class AuthService {
         this.guardarToken(resp['idToken']);
       })
     );
+  }
+
+  validarToken():boolean {
+    
+    if (this.leerToken() === '') {
+      return false;
+    } 
+
+    return true;
+    
   }
 
   private guardarToken(idToken:string){

@@ -13,6 +13,10 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PagesComponent } from './pages/pages.component';
+import { PostcardComponent } from './components/postcard/postcard.component';
+import { NuevopostComponent } from './pages/nuevopost/nuevopost.component';
+import { DetallepostComponent } from './pages/detallepost/detallepost.component';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { PagesComponent } from './pages/pages.component';
     SidebarComponent,
     HeaderComponent,
     HomeComponent,
-    PagesComponent
+    PagesComponent,
+    PostcardComponent,
+    NuevopostComponent,
+    DetallepostComponent,
+    NgDropFilesDirective,
   ],
   imports: [
     BrowserModule,
