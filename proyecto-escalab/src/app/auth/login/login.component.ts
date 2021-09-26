@@ -72,32 +72,45 @@ export class LoginComponent implements OnInit {
     this.authService.login(usuario)
     .subscribe(resp => {
 
-      this.router.navigateByUrl('/home');
+       this.authService.obtenerDatosPerfil()
+       .subscribe(resp =>{
 
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Autenticación correcta'
-      })
+         const Toast = Swal.mixin({
+           toast: true,
+           position: 'top-end',
+           showConfirmButton: false,
+           timer: 3000,
+           timerProgressBar: true,
+           didOpen: (toast) => {
+             toast.addEventListener('mouseenter', Swal.stopTimer)
+             toast.addEventListener('mouseleave', Swal.resumeTimer)
+           }
+         });
+
+         Toast.fire({
+           icon: 'success',
+           title: 'Autenticación correcta'
+         });
+
+         this.router.navigateByUrl('/home');
+
+       }, (err) => {
+
+         Swal.fire({
+           icon: 'error',
+           title: 'Error al ingresar',
+           text: `${err.error.error.message}`,
+         });
+       });
+ 
     }, (err) => {
 
       Swal.fire({
         icon: 'error',
         title: 'Error al ingresar',
         text: `${err.error.error.message}`,
-      })
-    })
+      });
+    });
   }
 
 }

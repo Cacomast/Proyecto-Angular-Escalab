@@ -17,6 +17,8 @@ import { PostcardComponent } from './components/postcard/postcard.component';
 import { NuevopostComponent } from './pages/nuevopost/nuevopost.component';
 import { DetallepostComponent } from './pages/detallepost/detallepost.component';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+import { ValidatePipe } from './pipes/validate.pipe';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
     NuevopostComponent,
     DetallepostComponent,
     NgDropFilesDirective,
+    ValidatePipe,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
 import { PagesComponent } from './pages/pages.component';
 import { NuevopostComponent } from './pages/nuevopost/nuevopost.component';
+import { DetallepostComponent } from './pages/detallepost/detallepost.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'nuevopost', component: NuevopostComponent},
+      {path: 'detallepost/:id', component: DetallepostComponent},
       {path: '', redirectTo:'/home', pathMatch:'full'}
     ]
   }, 

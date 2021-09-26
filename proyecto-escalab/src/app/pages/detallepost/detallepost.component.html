@@ -1,1 +1,32 @@
-<p>detallepost works!</p>
+<!-- Card -->
+<div class="card">
+    <div class="el-card-avatar el-overlay-1 d-flex justify-content-center">
+        <img class="img-responsive" [src]="postModel.urlImagen | validateUrl" alt="Card image cap" style="max-width:600px">
+    </div>
+    <div class="card-body col-12 col-lg-10 d-flex justify-content-center flex-column" style="margin:auto">
+        <h4 class=" card-title mt-3">Comentarios</h4>
+        <div class="chat-box ">
+            <!--chat Row -->
+            <ul class="chat-list ">
+                <!--chat Row -->
+                <app-message *ngFor="let item of postModel.comentarios" [comentario]="item"></app-message>
+                <!--chat Row -->
+            </ul>
+        </div>
+    </div>
+    <div class="card-body b-t col-12 col-lg-9 mt-3" style="margin:auto;">
+        <form class="" id="commentForm" [formGroup]="form" (ngSubmit)="sendMessage()">
+            <div class="row">
+                <div class="col-11">
+                    <textarea placeholder="Escriba su comentario." class="form-control b-0" formControlName="comentario"></textarea>
+                </div>
+                <div class="col-1 text-right ">
+                    <button type="submit" class="btn btn-info btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
+                </div>
+            </div>
+            <small *ngIf="comentario" class="text-danger">
+                Ingrese un valor válido. Máximo 250 caractéres.
+            </small>
+        </form>
+    </div>
+</div>

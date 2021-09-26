@@ -1,4 +1,5 @@
 export class PostModel {
+    id:string = '';
     email:string = '';
     fecha:Date = new Date();
     nombre:string = '';

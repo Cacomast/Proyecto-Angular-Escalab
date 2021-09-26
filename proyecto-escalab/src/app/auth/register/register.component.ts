@@ -98,32 +98,48 @@ export class RegisterComponent implements OnInit {
     this.authService.actualizarPerfil(usuario)
     .subscribe(resp => {
 
-      this.router.navigateByUrl('/home');
 
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Registro correcto'
-      })
+      this.authService.obtenerDatosPerfil()
+      .subscribe(resp =>{
+
+        console.log('Respuesta Obtener Datos:');
+        console.log(resp);
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        });
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Registro correcto'
+        });
+
+        this.router.navigateByUrl('/home');
+
+
+      }, (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar',
+          text: `${err.error.error.message}`,
+        });
+      });
 
     }, (err) => {
       Swal.fire({
         icon: 'error',
         title: 'Error al registrar',
         text: `${err.error.error.message}`,
-      })
-    })
+      });
+    });
   }
 
 }
