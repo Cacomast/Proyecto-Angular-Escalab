@@ -6,8 +6,12 @@ import Swal from 'sweetalert2';
 import { PostModel } from 'src/app/models/post.model';
 import { Comentario } from 'src/app/models/post.model';
 import { Like } from 'src/app/models/post.model';
-import { Router } from '@angular/router';
+import { Event, Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
+import { CargaImagenService } from 'src/app/services/carga-imagen.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable } from 'rxjs/internal/Observable';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nuevopost',
@@ -21,15 +25,20 @@ export class NuevopostComponent implements OnInit {
   postModel:PostModel = new PostModel();
   comentarios:Comentario[] = [];
   likes:Like[] =[];
+  event:any;
+  private uploadPercent: Observable<number>;
+  private urlImagen: Observable<string>;
 
-  constructor(private fb: FormBuilder, private router: Router, private postService: PostService) { }
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private postService: PostService,
+    private cargaImagenService: CargaImagenService,
+    private storage: AngularFireStorage) { }
 
   ngOnInit(): void {
     this.crearFormulario();
     this.obtenerDatosPerfil();
   }
-
-
 
   private crearFormulario() {
     this.form = this.fb.group({
@@ -63,7 +72,6 @@ export class NuevopostComponent implements OnInit {
       })
     }
 
-    console.log(this.form);
 
     Swal.fire({
       allowOutsideClick: false,
@@ -82,8 +90,28 @@ export class NuevopostComponent implements OnInit {
     this.postModel.comentarios = [];
     this.postModel.likes = [];
 
-    this.nuevoPost(this.postModel);
+    this.uploadFile(this.event);
 
+  }
+
+  uploadFile(event) {
+    const id = Math.random().toString(36).substring(2);
+    const file = event.target.files[0];
+    const filePath = `upload/profile_${id}`;
+    const ref = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges()
+    .pipe(
+      finalize(() => {
+        ref.getDownloadURL()
+        .subscribe( url => {
+          this.postModel.urlImagen = url;
+          this.nuevoPost(this.postModel);
+        })
+      })
+    ).subscribe();
   }
 
   private nuevoPost(post: PostModel){
@@ -98,7 +126,7 @@ export class NuevopostComponent implements OnInit {
 
       this.form.reset();
 
-      console.log(resp);
+      this.router.navigateByUrl('/home');
 
     }, (err) => {
       Swal.fire({
@@ -109,7 +137,9 @@ export class NuevopostComponent implements OnInit {
     })
   }
 
-
+  subirImg(e){
+    this.event = e;
+  }
 
   volver() {
     this.router.navigateByUrl("/home");

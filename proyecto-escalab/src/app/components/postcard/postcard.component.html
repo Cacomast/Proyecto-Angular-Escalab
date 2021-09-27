@@ -1,8 +1,10 @@
 <div class="card">
     <div class="el-card-item">
         <div class="el-card-avatar el-overlay-1">
-            <a class="image-popup-vertical-fit" [routerLink]="['/detallepost', postModel.id]">
-                <img src="{{ postModel.urlImagen }} " alt="Card image cap ">
+            <a href="{{ postModel.urlImagen }}" data-effect="mfp-zoom-out">
+
+                <!-- <a class="image-popup-vertical-fit" [routerLink]="['/detallepost', postModel.id]"> -->
+                <img src="{{ postModel.urlImagen }}" alt="Card image cap">
             </a>
         </div>
         <div class="card-body ">
@@ -12,7 +14,7 @@
             </ul>
             <h3 class="font-normal ">{{ postModel.titulo }}</h3>
             <p class="m-b-0 m-t-10 ">{{ postModel.contenido }}</p>
-            <a class="btn btn-outline-warning waves-effect waves-light m-t-20 " [routerLink]="[ '/detallepost', postModel.id] ">Ver Detalle</a>
+            <button class="btn btn-outline-warning waves-effect waves-light m-t-20 " [routerLink]="[ '/detallepost', postModel.id] ">Ver Detalle</button>
         </div>
     </div>
 </div>

@@ -2,7 +2,7 @@
     <div class="mb-5 text-right">
         <button class="btn btn-outline-success text-uppercase waves-effect waves-light" type="button" (click)="nuevoContenido()"><i class="fas fa-plus"></i> Nuevo Contenido</button>
     </div>
-    <div class="row el-element-overlay">
+    <div class="row el-element-overlay" id="image-popups">
         <!-- Column -->
         <app-postcard *ngFor="let item of posts" [post]="item" class="col-lg-4"></app-postcard>
     </div>

@@ -11,7 +11,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Subir Imagen</h4>
-                                <input type="file" formControlName="imagen" class="form-control" id="input-file" />
+                                <input type="file" accept=".png, .jpg" (change)="subirImg($event)" formControlName="imagen" class="form-control" id="input-file" />
                                 <small *ngIf="imagenNoValida" class="text-danger">
                                     Ingrese una imagen
                                 </small>

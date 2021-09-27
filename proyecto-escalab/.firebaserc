@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "postservice-d4cdb"
+  },
+  "targets": {
+    "postservice-d4cdb": {
+      "hosting": {
+        "proyecto-escalab": [
+          "postservice-d4cdb"
+        ]
+      }
+    }
   }
 }

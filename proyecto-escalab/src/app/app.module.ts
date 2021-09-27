@@ -3,6 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
 
+//Firebase
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -19,6 +25,7 @@ import { DetallepostComponent } from './pages/detallepost/detallepost.component'
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { ValidatePipe } from './pipes/validate.pipe';
 import { MessageComponent } from './components/message/message.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -42,7 +49,11 @@ import { MessageComponent } from './components/message/message.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAnalyticsModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

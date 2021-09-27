@@ -52,9 +52,7 @@ export class PostService {
 
   agregarComentario(comentario: Comentario, id: string) {
 
-    this.uri = `${environment.hostFirebase}/posts/${id}/comentarios.json.`;
-
-    console.log(`uri actualiza post: ${this.uri}`);
+    this.uri = `${environment.hostFirebase}/posts/${id}/comentarios.json`;
 
     return this.http.post(this.uri,comentario);
 
@@ -83,19 +81,24 @@ export class PostService {
   private ajustarId (postObj: object){
 
     this.posts = [];
-
+    
     if (postObj === null) { return []; }
 
     Object.keys(postObj).forEach(key => {
       const post:PostModel = postObj[key];
       post.id = key;
+
+      const listaComentarios: Comentario[] = [];
       
       if (post.comentarios === undefined) {
         post.comentarios = [];
-      }
+      } else {
+        Object.keys(post.comentarios).forEach( key => {
+          const comment:Comentario = post.comentarios[key];
+          listaComentarios.push(comment);
+        });
 
-      if (post.likes === undefined) {
-        post.likes = [];
+        post.comentarios = listaComentarios;
       }
 
       this.posts.push(post);

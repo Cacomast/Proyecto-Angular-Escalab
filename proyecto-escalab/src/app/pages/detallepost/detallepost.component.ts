@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Comentario, PostModel } from 'src/app/models/post.model';
+import { MensajesService } from 'src/app/services/mensajes.service';
 
 import { PostService } from 'src/app/services/post.service';
 
@@ -17,11 +19,23 @@ export class DetallepostComponent implements OnInit {
 
   postModel: PostModel;
   comment: Comentario;
+  comentarios:Comentario[];
   id:string;
   form: FormGroup;
   userData:any;
 
-  constructor(private postService: PostService, private route: ActivatedRoute, private router: Router, private fb: FormBuilder) { }
+  constructor(private postService: PostService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private fb: FormBuilder,
+    private mensajeService: MensajesService) {
+
+      this.mensajeService.cargarMensajes(this.route.snapshot.paramMap.get('id'))
+      .subscribe( resp => {
+        this.comentarios = resp;
+      });
+
+    }
 
   ngOnInit(): void {
     this.crearFormulario();

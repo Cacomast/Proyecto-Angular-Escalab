@@ -5,6 +5,8 @@ import { Comentario } from 'src/app/models/post.model';
 import { Like } from 'src/app/models/post.model';
 import { PostService } from 'src/app/services/post.service';
 
+import { imagesPopups } from '../../../assets/js/custom'; 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,9 +21,13 @@ export class HomeComponent implements OnInit {
   likes:Like[];
   comentarios:Comentario[];
 
-  constructor(private router:Router, private postService: PostService) { }
+  constructor(private router:Router, private postService: PostService) {
+    imagesPopups();
+  }
 
   ngOnInit(): void {
+
+    imagesPopups();
 
     this.postModel = new PostModel();
     this.comentarios = [];
@@ -33,7 +39,6 @@ export class HomeComponent implements OnInit {
     this.postService.getPosts()
     .subscribe (resp => {
       this.posts = resp;
-      console.log(this.posts);
     }, (err) => {
 
     })
