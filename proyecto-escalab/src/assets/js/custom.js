@@ -375,7 +375,7 @@ export function labelFloating() {
 }
 
 export function btnCircleCustom() {
-    $('.btn-circle-custom').click(function() {
+    $('#btn-custom-up').click(function() {
         $('body, html').animate({
             scrollTop: '0px'
         }, 300);
@@ -383,9 +383,9 @@ export function btnCircleCustom() {
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > 0) {
-            $('.btn-circle-custom').slideDown(300);
+            $('#btn-custom-up').slideDown(300);
         } else {
-            $('.btn-circle-custom').slideUp(300);
+            $('#btn-custom-up').slideUp(300);
         }
     });
 }
