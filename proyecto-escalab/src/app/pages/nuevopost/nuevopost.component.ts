@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidatorsService } from 'src/app/services/validators.service';
+
 import Swal from 'sweetalert2';
+
+import { dropify, labelFloating } from '../../../assets/js/custom'; 
 
 import { PostModel } from 'src/app/models/post.model';
 import { Comentario } from 'src/app/models/post.model';
 import { Like } from 'src/app/models/post.model';
-import { Event, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { CargaImagenService } from 'src/app/services/carga-imagen.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -33,11 +35,14 @@ export class NuevopostComponent implements OnInit {
     private router: Router,
     private postService: PostService,
     private cargaImagenService: CargaImagenService,
-    private storage: AngularFireStorage) { }
+    private storage: AngularFireStorage) {
+     }
 
   ngOnInit(): void {
     this.crearFormulario();
     this.obtenerDatosPerfil();
+    dropify();
+    labelFloating();
   }
 
   private crearFormulario() {
@@ -65,6 +70,8 @@ export class NuevopostComponent implements OnInit {
   }
 
   nuevoContenido() {
+
+    console.log(this.form);
 
     if (this.form.invalid) {
       return Object.values(this.form.controls).forEach(control => {
@@ -139,6 +146,7 @@ export class NuevopostComponent implements OnInit {
 
   subirImg(e){
     this.event = e;
+    console.log(this.event);
   }
 
   volver() {

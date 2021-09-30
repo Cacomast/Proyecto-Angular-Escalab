@@ -26,6 +26,7 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { ValidatePipe } from './pipes/validate.pipe';
 import { MessageComponent } from './components/message/message.component';
 import { environment } from 'src/environments/environment';
+import { ValidateComentariosPipe } from './pipes/validate-comentarios.pipe';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { environment } from 'src/environments/environment';
     NgDropFilesDirective,
     ValidatePipe,
     MessageComponent,
+    ValidateComentariosPipe,
   ],
   imports: [
     BrowserModule,

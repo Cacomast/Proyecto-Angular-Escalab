@@ -109,13 +109,6 @@ export class DetallepostComponent implements OnInit {
     .subscribe (resp => {
 
       console.log(resp);
-
-      Swal.fire({
-        allowOutsideClick: false,
-        icon:'success',
-        text:'Comentario enviado correctamente.'
-      });
-
       this.form.reset();
 
     }, (err) => {

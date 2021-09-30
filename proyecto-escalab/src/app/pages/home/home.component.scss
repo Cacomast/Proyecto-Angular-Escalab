@@ -117,3 +117,18 @@ ul.list-icons li i {
     fill: #06d79c;
     fill-opacity: 0.2;
 }
+
+.container-btn-up {
+    display: block;
+    cursor: pointer;
+    position: fixed;
+    bottom: 66px;
+    right: 20px;
+}
+
+.btn-circle-custom {
+    width: 60px;
+    height: 60px;
+    padding: 14px 15px;
+    font-size: 36px;
+}

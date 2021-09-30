@@ -30,6 +30,13 @@ export class PostService {
     return this.http.post(this.uri,postObj);
   }
 
+  eliminarPost(id: string){
+    this.uri = `${environment.hostFirebase}/posts/${id}.json`;
+
+    return this.http.delete(this.uri);
+
+  }
+
   getPosts() {
 
     this.uri = `${environment.hostFirebase}/posts.json`;

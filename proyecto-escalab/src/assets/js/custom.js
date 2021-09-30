@@ -326,3 +326,66 @@ export function imagesPopups() {
         midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
     });
 }
+
+export function dropify() {
+    // Basic
+    $('.dropify').dropify();
+
+    // Translated
+    $('.dropify-fr').dropify({
+        messages: {
+            default: 'Glissez-déposez un fichier ici ou cliquez',
+            replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+            remove: 'Supprimer',
+            error: 'Désolé, le fichier trop volumineux'
+        }
+    });
+
+    // Used events
+    var drEvent = $('#input-file-events').dropify();
+
+    drEvent.on('dropify.beforeClear', function(event, element) {
+        return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+    });
+
+    drEvent.on('dropify.afterClear', function(event, element) {
+        alert('File deleted');
+    });
+
+    drEvent.on('dropify.errors', function(event, element) {
+        console.log('Has Errors');
+    });
+
+    var drDestroy = $('#input-file-to-destroy').dropify();
+    drDestroy = drDestroy.data('dropify')
+    $('#toggleDropify').on('click', function(e) {
+        e.preventDefault();
+        if (drDestroy.isDropified()) {
+            drDestroy.destroy();
+        } else {
+            drDestroy.init();
+        }
+    });
+}
+
+export function labelFloating() {
+    $(".floating-labels .form-control").on("focus blur", function(e) {
+        $(this).parents(".form-group").toggleClass("focused", "focus" === e.type || this.value.length > 0);
+    }).trigger("blur");
+}
+
+export function btnCircleCustom() {
+    $('.btn-circle-custom').click(function() {
+        $('body, html').animate({
+            scrollTop: '0px'
+        }, 300);
+    });
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 0) {
+            $('.btn-circle-custom').slideDown(300);
+        } else {
+            $('.btn-circle-custom').slideUp(300);
+        }
+    });
+}

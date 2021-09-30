@@ -17,11 +17,12 @@
     <div class="card-body b-t col-12 col-lg-9 mt-3" style="margin:auto;">
         <form class="" id="commentForm" [formGroup]="form" (ngSubmit)="sendMessage()">
             <div class="row">
-                <div class="col-11">
+                <div class="col-10">
                     <textarea placeholder="Escriba su comentario." class="form-control b-0" formControlName="comentario"></textarea>
                 </div>
-                <div class="col-1 text-right ">
-                    <button type="submit" class="btn btn-info btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
+                <div class="col-2 d-flex justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-info btn-circle waves-effect waves-light btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
+                    <button class="btn btn-outline-danger btn-circle btn-lg waves-effect waves-light ml-2" [routerLink]="['/home'] "><i class="fas fa-undo-alt"></i></button>
                 </div>
             </div>
             <small *ngIf="comentario" class="text-danger">

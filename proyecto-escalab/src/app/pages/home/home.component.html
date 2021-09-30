@@ -1,9 +1,12 @@
 <div class="d-flex flex-column">
     <div class="mb-5 text-right">
-        <button class="btn btn-outline-success text-uppercase waves-effect waves-light" type="button" (click)="nuevoContenido()"><i class="fas fa-plus"></i> Nuevo Contenido</button>
+        <button class="btn btn-outline-success text-uppercase waves-effect waves-light" type="button" (click)="nuevoContenido()"><i class="fas fa-plus"></i> Subir imagen</button>
     </div>
-    <div class="row el-element-overlay" id="image-popups">
+    <div class="card-columns el-element-overlay" id="image-popups">
         <!-- Column -->
-        <app-postcard *ngFor="let item of posts" [post]="item" class="col-lg-4"></app-postcard>
+        <app-postcard *ngFor="let item of posts" [post]="item" [cache]="cache" (eliminarPost)="eliminarContenido($event)" class="col-lg-4"></app-postcard>
     </div>
+</div>
+<div class="container-btn-up">
+    <button type="button" class="btn btn-info btn-circle waves-effect waves-light btn-circle-custom"><i class="fas fas-2x fa-sort-up"></i> </button>
 </div>
