@@ -110,6 +110,7 @@ export class DetallepostComponent implements OnInit {
 
       console.log(resp);
       this.form.reset();
+      Swal.close();
 
     }, (err) => {
 
