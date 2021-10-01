@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,6 +6,8 @@ import { Comentario, PostModel } from 'src/app/models/post.model';
 import { MensajesService } from 'src/app/services/mensajes.service';
 
 import { PostService } from 'src/app/services/post.service';
+
+import { btnCircleCustom } from '../../../assets/js/custom'; 
 
 import Swal from 'sweetalert2';
 
@@ -44,6 +45,12 @@ export class DetallepostComponent implements OnInit {
 
     this.getPost();
     this.obtenerDatosPerfil();
+
+    btnCircleCustom();
+  }
+
+  nuevoContenido(){
+    this.router.navigateByUrl("/nuevopost");
   }
 
   private crearFormulario() {

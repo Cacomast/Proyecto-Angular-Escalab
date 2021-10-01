@@ -11,3 +11,17 @@
     max-width: 400px;
     max-height: 400px;
 }
+
+.container-btn-up {
+    display: block;
+    cursor: pointer;
+    position: fixed;
+    bottom: 66px;
+    right: 24px;
+}
+
+.btn-circle-custom {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+}

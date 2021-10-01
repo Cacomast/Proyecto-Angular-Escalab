@@ -11,6 +11,9 @@
             <ul class="list-inline font-14 ">
                 <li class="p-l-0 ">{{ postModel.fecha | date }}</li>
                 <li>{{ postModel.comentarios.length | validateComentarios }}</li>
+                <!-- <li><button type="button" class="btn btn-success btn-sm"><i class="fa fa-heart-o"></i>   Me gusta</button>
+                    <button type="button" class="btn btn-success btn-sm"><i class="fa fa-heart"></i>   Te gusta</button>
+                </li> -->
             </ul>
             <div class="p-l-0 pl-2" style="font-size: small;">Subido por {{ postModel.nombre }}</div>
             <h3 class="font-normal mt-3">{{ postModel.titulo }}</h3>

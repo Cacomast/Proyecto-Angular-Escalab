@@ -111,6 +111,8 @@ export class AuthService {
   }
 
   validarToken():boolean {
+
+    console.log('Validando token');
     
     if (this.leerToken() === '') {
       return false;

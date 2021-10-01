@@ -38,15 +38,23 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../../assets/images/icon/staff-w.png" alt="user" class="profile-pic" /></a>
-                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark d-flex" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <img src="../../../assets/images/icon/staff-w.png" alt="user" class="profile-pic" /> -->
+                        <i class="fa fa-2x fa-user-circle"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="../../../assets/images/icon/staff.png" alt="user"></div>
+                                    <div class="u-img">
+                                        <!-- <img src="../../../assets/images/icon/staff.png" alt="user"> -->
+                                        <i class="fa fa-4x fa-user-circle"></i>
+
+
+                                    </div>
                                     <div class="u-text">
                                         <h4 class="mt-2">{{userData.nombre}}</h4>
-                                        <p class="text-muted mt-1">{{userData.mail}}</p><button (click)="logout()" class="btn btn-danger mt-2">Salir</button></div>
+                                        <p class="text-muted mt-1">{{userData.mail}}</p><button (click)="logout()" class="btn btn-danger mt-2"><i class="fa fa-sign-out"></i> Salir</button></div>
                                 </div>
                             </li>
                         </ul>

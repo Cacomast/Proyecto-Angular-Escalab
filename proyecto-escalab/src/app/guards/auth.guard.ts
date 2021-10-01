@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   constructor(private auth: AuthService, private router: Router){}
 
   canLoad(route: Route, segments: UrlSegment[]): boolean {
-      return true;
+    return true;
   }
 
   canActivate(
