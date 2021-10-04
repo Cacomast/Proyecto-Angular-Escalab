@@ -22,5 +22,17 @@ export class ValidatorsService {
     }
   }
 
+  isImage(args:string) {
+    return (formGroup: FormGroup) => {
+      const imgControl = formGroup.controls[args];
+
+      if(!args.startsWith('image')){
+        imgControl.setErrors({ formatoInvalido: true })
+      } else {
+        imgControl.setErrors(null);
+      }
+    }
+  }
+
 
 }

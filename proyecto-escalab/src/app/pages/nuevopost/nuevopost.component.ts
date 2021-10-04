@@ -14,6 +14,7 @@ import { CargaImagenService } from 'src/app/services/carga-imagen.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs/internal/Observable';
 import { finalize } from 'rxjs/operators';
+import { ValidatorsService } from 'src/app/services/validators.service';
 
 @Component({
   selector: 'app-nuevopost',
@@ -31,11 +32,14 @@ export class NuevopostComponent implements OnInit {
   private uploadPercent: Observable<number>;
   private urlImagen: Observable<string>;
 
+  susNuevoPost: any;
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private postService: PostService,
     private cargaImagenService: CargaImagenService,
-    private storage: AngularFireStorage) {
+    private storage: AngularFireStorage,
+    private validators: ValidatorsService) {
      }
 
   ngOnInit(): void {
@@ -44,6 +48,36 @@ export class NuevopostComponent implements OnInit {
     dropify();
     labelFloating();
   }
+
+  ngOnDestroy(): void {
+    if (!this.susNuevoPost === undefined) {
+      this.susNuevoPost.unsubscribe();  
+    }
+  }
+
+  canDeactivate(): Promise<any> | boolean {
+    if (this.form.dirty) {
+
+      return new Promise((resolve, reject) => {
+        Swal.fire({
+          title: '¿Está seguro?',
+          text: "No se guardarán los cambios",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, estoy seguro.'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            resolve(true);
+          }
+          resolve(false);
+        })
+      })
+    } else {
+      return true;
+    }
+}   
 
   private crearFormulario() {
     this.form = this.fb.group({
@@ -62,7 +96,7 @@ export class NuevopostComponent implements OnInit {
   }
 
   get imagenNoValida() {
-    return this.form.get('imagen').invalid && this.form.get('imagen').touched;
+    return this.form.get('imagen').invalid && this.form.get('imagen').touched && this.event.target.files[0].type.startsWith('image');
   }
 
   obtenerDatosPerfil(){
@@ -70,8 +104,6 @@ export class NuevopostComponent implements OnInit {
   }
 
   nuevoContenido() {
-
-    console.log(this.form);
 
     if (this.form.invalid) {
       return Object.values(this.form.controls).forEach(control => {
@@ -122,7 +154,7 @@ export class NuevopostComponent implements OnInit {
   }
 
   private nuevoPost(post: PostModel){
-    this.postService.nuevoPost(post)
+    this.susNuevoPost = this.postService.nuevoPost(post)
     .subscribe(resp => {
 
       Swal.fire({
@@ -133,7 +165,7 @@ export class NuevopostComponent implements OnInit {
 
       this.form.reset();
 
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/posts');
 
     }, (err) => {
       Swal.fire({
@@ -146,11 +178,16 @@ export class NuevopostComponent implements OnInit {
 
   subirImg(e){
     this.event = e;
-    console.log(this.event);
+
+    if (!this.event.target.files[0].type.startsWith('image')) {
+      this.form.controls['imagen'].setErrors({ imgInvalid: true });
+    } else {
+      this.form.controls['imagen'].setErrors(null);
+    }
   }
 
   volver() {
-    this.router.navigateByUrl("/home");
+    this.router.navigateByUrl("/posts");
   }
 
 }

@@ -10,6 +10,8 @@ import { CacheModel } from 'src/app/models/cache.model';
 
 import { imagesPopups, btnCircleCustom } from '../../../assets/js/custom'; 
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -28,6 +30,9 @@ export class HomeComponent implements OnInit {
   likes:Like[];
   comentarios:Comentario[];
 
+  susPost: any;
+  susDelete: any;
+
   constructor(private router:Router, private postService: PostService) {
     imagesPopups();
   }
@@ -45,8 +50,15 @@ export class HomeComponent implements OnInit {
     this.obtenerDatosPerfil();
   }
 
+  ngOnDestroy(): void {
+    this.susPost.unsubscribe();
+    if (!this.susDelete === undefined) {
+      this.susDelete.unsubscribe();
+    }
+  }
+
   getPosts(){
-    this.postService.getPosts()
+    this.susPost = this.postService.getPosts()
     .subscribe (resp => {
       this.posts = resp;
       this.posts = this.posts.sort((a,b) => a.fecha < b.fecha?1:a.fecha > b.fecha?-1:0);
@@ -56,7 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   nuevoContenido(){
-    this.router.navigateByUrl("/nuevopost");
+    this.router.navigateByUrl("/posts/nuevopost");
   }
 
   eliminarContenido(id:string) {
@@ -81,7 +93,7 @@ export class HomeComponent implements OnInit {
     
         Swal.showLoading();
 
-        this.postService.eliminarPost(id)
+        this.susDelete = this.postService.eliminarPost(id)
         .subscribe( resp => {
           Swal.fire(
           '¡Se fue!',

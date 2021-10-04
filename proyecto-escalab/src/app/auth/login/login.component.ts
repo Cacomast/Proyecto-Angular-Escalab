@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
            title: 'Autenticación correcta'
          });
 
-         this.router.navigateByUrl('/home');
+         this.router.navigateByUrl('/posts');
 
        }, (err) => {
 

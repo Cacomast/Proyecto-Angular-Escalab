@@ -18,7 +18,7 @@
             <div class="p-l-0 pl-2" style="font-size: small;">Subido por {{ postModel.nombre }}</div>
             <h3 class="font-normal mt-3">{{ postModel.titulo }}</h3>
             <p class="m-b-0 m-t-10 ">{{ postModel.contenido }}</p>
-            <button class="btn btn-outline-info waves-effect waves-light m-t-20 " [routerLink]="[ '/detallepost', postModel.id] "><i class="far fa-comment-dots"></i> Comentar</button>
+            <button class="btn btn-outline-info waves-effect waves-light m-t-20 " [routerLink]="[ '/posts/detallepost', postModel.id] "><i class="far fa-comment-dots"></i> Comentar</button>
             <button *ngIf="postModel.email === cache.mail" class="btn btn-outline-danger waves-effect waves-light m-t-20 ml-2" (click)="eliminar()"><i class="far fa-trash-alt"></i></button>
         </div>
     </div>

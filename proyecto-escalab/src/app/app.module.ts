@@ -18,15 +18,13 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
-import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { environment } from 'src/environments/environment';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NopagefoundComponent,
-    NgDropFilesDirective
+    NopagefoundComponent
   ],
   imports: [
     BrowserModule,

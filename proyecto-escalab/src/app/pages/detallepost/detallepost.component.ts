@@ -25,20 +25,24 @@ export class DetallepostComponent implements OnInit {
   form: FormGroup;
   userData:any;
 
+  susDetallePost: any;
+  susMensajesPost: any;
+  susEnviarMensaje: any;
+
   constructor(private postService: PostService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
     private mensajeService: MensajesService) {
-
-      this.mensajeService.cargarMensajes(this.route.snapshot.paramMap.get('id'))
-      .subscribe( resp => {
-        this.comentarios = resp;
-      });
-
     }
 
   ngOnInit(): void {
+
+    this.susMensajesPost = this.mensajeService.cargarMensajes(this.route.snapshot.paramMap.get('id'))
+    .subscribe( resp => {
+      this.comentarios = resp;
+    });
+
     this.crearFormulario();
     this.postModel = new PostModel();
     this.id = this.route.snapshot.paramMap.get('id');
@@ -49,8 +53,16 @@ export class DetallepostComponent implements OnInit {
     btnCircleCustom();
   }
 
+  ngOnDestroy(): void {
+    this.susDetallePost.unsubscribe();
+    this.susMensajesPost.unsubscribe();
+    if (!this.susEnviarMensaje === undefined) {
+      this.susEnviarMensaje.unsubscribe();
+    }
+  }
+
   nuevoContenido(){
-    this.router.navigateByUrl("/nuevopost");
+    this.router.navigateByUrl("/posts/nuevopost");
   }
 
   private crearFormulario() {
@@ -68,13 +80,13 @@ export class DetallepostComponent implements OnInit {
   }
 
   getPost(){
-    this.postService.getPost(this.id)
+    this.susDetallePost = this.postService.getPost(this.id)
     .subscribe ((resp) => {
 
       this.postModel = resp;
 
       if (resp === null) {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/posts');
       }
       this.postModel.id = this.id;
     }, (err) => {
@@ -112,7 +124,7 @@ export class DetallepostComponent implements OnInit {
   }
 
   private actualizarPost(postModel: PostModel){
-    this.postService.agregarComentario(this.comment, this.postModel.id)
+    this.susEnviarMensaje = this.postService.agregarComentario(this.comment, this.postModel.id)
     .subscribe (resp => {
 
       console.log(resp);

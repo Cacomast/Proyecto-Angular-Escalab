@@ -8,7 +8,7 @@ import { AuthRoutingModule } from './auth/auth.routing';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
 
 const routes: Routes = [
-  
+  {path: '', redirectTo:'/posts', pathMatch:'full'},
   {path: '**', component: NopagefoundComponent}
 ];
 

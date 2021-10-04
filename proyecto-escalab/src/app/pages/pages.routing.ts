@@ -9,7 +9,7 @@ import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
     {
-        path:'',
+        path:'posts',
         component: PagesComponent,
         canActivate: [ AuthGuard ],        
         loadChildren: () => import('./child-routes.module').then(m => m.ChildRoutesModule),

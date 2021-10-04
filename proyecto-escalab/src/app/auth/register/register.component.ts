@@ -122,7 +122,7 @@ export class RegisterComponent implements OnInit {
           title: 'Registro correcto'
         });
 
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/posts');
 
 
       }, (err) => {
